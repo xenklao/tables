@@ -73,10 +73,19 @@ public class UserDaoJDBCImpl implements UserDao {
             System.out.println("User с именем – " + name + " добавлен в базу данных");
         } catch (SQLException e) {
             e.printStackTrace();
+        } finally {
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
         }
     }
 
     public void removeUserById(long id) {
+        Connection connection = Util.getConnection();
         try (Statement statement = connection.createStatement()) {
             String sql = "DELETE FROM test.users where id";
             statement.executeUpdate(sql);
