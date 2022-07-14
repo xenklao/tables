@@ -19,7 +19,10 @@ public class Util {
             connection.setAutoCommit(false);
         } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
+
         }
+
         return connection;
+
     }
 }
