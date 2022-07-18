@@ -10,6 +10,7 @@ import java.util.ArrayList;
 
 public class Main {
     private static final UserService userService = new UserServiceImpl();
+    private static final UserService userService1 = new UserServiceImpl();
 //    private static final UserDaoJDBCImpl userService = new UserDaoJDBCImpl();
     //    private static final User user1 = new User("Mitroy", "Gopit", (byte) 60);
 //    private static final User user2 = new User("Jija", "Top", (byte) 15);
