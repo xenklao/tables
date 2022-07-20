@@ -113,6 +113,7 @@ public class UserDaoJDBCImpl implements UserDao {
                     connection.close();
                 } catch (SQLException e) {
                     e.printStackTrace();
+                    e.printStackTrace();
                 }
             }
         }
