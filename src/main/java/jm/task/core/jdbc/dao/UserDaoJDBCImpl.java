@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class UserDaoJDBCImpl implements UserDao {
-     private Connection connection;
+    private Connection connection;
 
     public UserDaoJDBCImpl() {
 
@@ -52,13 +52,14 @@ public class UserDaoJDBCImpl implements UserDao {
     public void dropUsersTable() throws SQLException {
         connection = Util.getConnection();
         try (Statement statement = connection.createStatement()) {
-            statement.executeUpdate("Drop table if exists mybasetest.users");
+            statement.executeUpdate("Drop table if exists test.users");
             System.out.println("Таблица удалена");
             connection.commit();
         } catch (SQLException e) {
             connection.rollback();
             e.printStackTrace();
         } finally {
+
             if (connection != null) {
                 try {
                     connection.close();
@@ -96,10 +97,10 @@ public class UserDaoJDBCImpl implements UserDao {
     public void removeUserById(long id) throws SQLException {
         connection = Util.getConnection();
         //(Statement statement = connection.createStatement())
-        try  {
+        try {
             String sql = "DELETE FROM users where id = ?";
             var preparedStatement = connection.prepareStatement(sql);
-            preparedStatement.setLong(1,id);
+            preparedStatement.setLong(1, id);
 //            statement.executeUpdate(sql);
             preparedStatement.executeUpdate();
             connection.commit();
@@ -113,7 +114,7 @@ public class UserDaoJDBCImpl implements UserDao {
                     connection.close();
                 } catch (SQLException e) {
                     e.printStackTrace();
-                  
+
                 }
             }
         }
