@@ -14,14 +14,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class UserDaoJDBCImpl implements UserDao {
-    private Connection connection;
+//    private Connection connection;
 
     public UserDaoJDBCImpl() {
 
     }
 
     public void createUsersTable() throws SQLException {
-        connection = Util.getConnection();
+        Connection connection = Util.getConnection();
         try (Statement statement = connection.createStatement();
         ) {
 
@@ -50,7 +50,7 @@ public class UserDaoJDBCImpl implements UserDao {
     }
 
     public void dropUsersTable() throws SQLException {
-        connection = Util.getConnection();
+        Connection connection = Util.getConnection();
         try (Statement statement = connection.createStatement()) {
             statement.executeUpdate("Drop table if exists test.users");
             System.out.println("Таблица удалена");
@@ -72,7 +72,7 @@ public class UserDaoJDBCImpl implements UserDao {
 
     public void saveUser(String name, String lastName, byte age) throws SQLException {
         String sql = "INSERT INTO test.users(name, lastname, age) VALUES(?,?,?)";
-        connection = Util.getConnection();
+        Connection connection = Util.getConnection();
         try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
             preparedStatement.setString(1, name);
             preparedStatement.setString(2, lastName);
@@ -95,7 +95,7 @@ public class UserDaoJDBCImpl implements UserDao {
     }
 
     public void removeUserById(long id) throws SQLException {
-        connection = Util.getConnection();
+        Connection connection = Util.getConnection();
         //(Statement statement = connection.createStatement())
         try {
             String sql = "DELETE FROM users where id = ?";
@@ -123,7 +123,7 @@ public class UserDaoJDBCImpl implements UserDao {
     public List<User> getAllUsers() throws SQLException {
         List<User> allUser = new ArrayList<>();
         String sql = "SELECT id, name, lastName, age from test.users";
-        connection = Util.getConnection();
+        Connection connection = Util.getConnection();
         try (Statement statement = connection.createStatement()) {
             ResultSet resultSet = statement.executeQuery(sql);
 
@@ -153,7 +153,7 @@ public class UserDaoJDBCImpl implements UserDao {
     }
 
     public void cleanUsersTable() throws SQLException {
-        connection = Util.getConnection();
+        Connection connection = Util.getConnection();
         String sql = "DELETE FROM test.users";
         try (Statement statement = connection.createStatement()) {
             statement.executeUpdate(sql);
